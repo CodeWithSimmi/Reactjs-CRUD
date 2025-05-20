@@ -1,45 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  const auth = localStorage.getItem("user");
+  const [user, setUser] = useState(localStorage.getItem("user"));
   const navigate = useNavigate();
 
-  const logout = () => {
-    console.log("Logout button clicked");
-    localStorage.clear("user"); // Remove user data
-    navigate('/signup');
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
   };
 
   const navItems = [
-    { path: "/", label: "Products" },
-    { path: "/add", label: "Add Product" },
-    { path: "/update", label: "Update Product" },
-    ...(auth
-      ? [{ path: "#", label: "Logout", action: logout }]
-      : [{ path: "/signup", label: "Sign Up" }]),
+    { path: "/", label: "Home" },
     { path: "/profile", label: "Profile" },
+
+    
   ];
 
   return (
-    <div>
-      <div className="bg-blue-500 text-white p-4">
-        <ul className="flex gap-8 justify-center items-center">
+    <div className="bg-gray-800 text-white">
+      <div className="container mx-auto flex items-center justify-between p-4">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold text-white">
+          Logo
+        </Link>
+
+        {/* Navigation Items */}
+        <ul className="flex gap-8">
           {navItems.map((item, index) => (
             <li key={index}>
-              {item.action ? (
-                <button
-                  onClick={item.action}
-                  className="text-blue-500 p-1  bg-white border-none  cursor-pointer rounded-sm"
-                >
-                  {item.label}
-                </button>
-              ) : (
-                <Link to={item.path}>{item.label}</Link>
-              )}
+              <Link
+                to={item.path}
+                className="text-white hover:text-gray-300 transition"
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
+
+        {/* Auth Buttons */}
+        <div className="flex items-center gap-4">
+          {!user ? (
+            <>
+              <Link
+                to="/login"
+                className="hover:underline text-white text-sm"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="bg-blue-500 px-4 py-2 rounded text-sm hover:bg-blue-600 transition"
+              >
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="text-sm">Welcome, {JSON.parse(user).username}</span>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 px-4 py-2 rounded text-sm hover:bg-red-600 transition"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

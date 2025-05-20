@@ -15,7 +15,10 @@ const LoginForm = () => {
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const user = users.find(
-      (u) => u.username === formData.username && u.password === formData.password
+      (u) =>
+        (u.username.toLowerCase() === formData.username.toLowerCase() ||
+          u.email.toLowerCase() === formData.username.toLowerCase()) &&
+        u.password === formData.password
     );
 
     if (!user) {
@@ -25,8 +28,8 @@ const LoginForm = () => {
 
     localStorage.setItem("user", JSON.stringify(user));
     alert("Login successful!");
-    navigate("/");
-    window.location.reload(); // Refresh to update Navbar
+    navigate("/profile");
+    window.location.reload();
   };
 
   return (
@@ -37,7 +40,7 @@ const LoginForm = () => {
         <input
           name="username"
           type="text"
-          placeholder="Username"
+          placeholder="Username or Email"
           onChange={handleChange}
           required
           className="w-full p-2 border mb-4 rounded"

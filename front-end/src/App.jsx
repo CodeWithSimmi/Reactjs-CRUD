@@ -1,33 +1,37 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Component/Navbar";
+
+
+import "./App.css";
+import Nav from "./Component/Nav";
+import { Route, Routes } from "react-router-dom";
+import Footer from "./Component/Footer";
+
+import Privatecomponent from "./Component/Privatecomponent";
+
+import LoginForm from "./Component/LoginForm";
+
 import LandingPage from "./pages/LandingPage";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
-import ProductPage from "./pages/ProductPage";
+import SignupForm from "./Component/SignupForm";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        {/* <Route element={<Privatecomponent />}> */}
+    <>
+      <div className="App">
+        <Nav />
+
+        <Routes>
+          <Route element={<Privatecomponent />}>
+            <Route path="/profile" element={<h6> React Crud Operations</h6>} />
+          </Route>
+
+          {/* Public routes */}
+
           <Route path="/" element={<LandingPage />} />
-          <Route path="/" element={<h6>Product Listing</h6>} />
-          <Route path="/add" element={<h6>Add Product</h6>} />
-          <Route path="/update" element={<h6>update Product</h6>} />
-          <Route path="/logout" element={<h6>Logout</h6>} />
-          <Route path="/profile" element={<h6>Profile</h6>} />
-          <Route path="/products" element={<ProductPage />} />
-        {/* </Route> */}
-
-
-
-        {/* Public routes */}
-
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </Router>
+          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/login" element={<LoginForm />} />
+        </Routes>
+        <Footer />
+      </div>
+    </>
   );
 }
 

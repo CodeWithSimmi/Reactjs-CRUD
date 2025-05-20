@@ -16,15 +16,45 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match!");
       return;
     }
 
+    // Validate username and email uniqueness
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    users.push(formData);
+    const existingUser = users.find(
+      (user) =>
+        user.username.toLowerCase() === formData.username.toLowerCase() ||
+        user.email.toLowerCase() === formData.email.toLowerCase()
+    );
+
+    if (existingUser) {
+      setError("Username or Email already exists!");
+      return;
+    }
+
+    // Save new user (excluding confirmPassword)
+    const newUser = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
     alert("Signup successful!");
+
+    // Reset form
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+    setError("");
   };
 
   return (
@@ -37,6 +67,7 @@ const SignupForm = () => {
           type="text"
           placeholder="Username"
           onChange={handleChange}
+          value={formData.username}
           required
           className="w-full p-2 border mb-4 rounded"
         />
@@ -45,6 +76,7 @@ const SignupForm = () => {
           type="email"
           placeholder="Email"
           onChange={handleChange}
+          value={formData.email}
           required
           className="w-full p-2 border mb-4 rounded"
         />
@@ -53,6 +85,7 @@ const SignupForm = () => {
           type="password"
           placeholder="Password"
           onChange={handleChange}
+          value={formData.password}
           required
           className="w-full p-2 border mb-4 rounded"
         />
@@ -61,6 +94,7 @@ const SignupForm = () => {
           type="password"
           placeholder="Confirm Password"
           onChange={handleChange}
+          value={formData.confirmPassword}
           required
           className="w-full p-2 border mb-4 rounded"
         />

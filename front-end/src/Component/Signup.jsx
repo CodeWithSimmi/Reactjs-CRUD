@@ -64,7 +64,7 @@ const Signup = () => {
     <div className="flex items-center justify-center">
       <div className="flex flex-col mt-8 gap-4 w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-gray-800 text-3xl font-semibold mb-2 text-center">
-          Register
+          SignUp
         </h1>
         {error && (
           <div className="text-red-500 text-sm font-medium bg-red-100 p-2 rounded">
@@ -96,6 +96,15 @@ const Signup = () => {
             type="password"
             name="password"
             placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            className="rounded-md p-3 border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 outline-none transition-all"
+            type="password"
+            name="password"
+            placeholder="Enter Confirm Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
