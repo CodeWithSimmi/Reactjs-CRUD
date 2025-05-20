@@ -12,7 +12,7 @@ const Nav = () => {
   };
 
   const navItems = [
-    { path: "/", label: "Home" },
+    
     { path: "/profile", label: "Profile" },
 
     

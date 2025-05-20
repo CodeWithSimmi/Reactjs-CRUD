@@ -11,6 +11,7 @@ import LoginForm from "./Component/LoginForm";
 
 import LandingPage from "./pages/LandingPage";
 import SignupForm from "./Component/SignupForm";
+import ProductTable from "./Component/ProductTable";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
 
         <Routes>
           <Route element={<Privatecomponent />}>
-            <Route path="/profile" element={<h6> React Crud Operations</h6>} />
+            <Route path="/profile" element={<ProductTable/>} />
           </Route>
 
           {/* Public routes */}
