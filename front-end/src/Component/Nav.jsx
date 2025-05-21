@@ -1,15 +1,32 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Nav = () => {
-  const [user, setUser] = useState(localStorage.getItem("user"));
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu visibility
+  // Helper to safely parse user from localStorage
+  const getUserFromStorage = () => {
+    try {
+      const userString = localStorage.getItem("user");
+      if (!userString) return null;
+      const userObj = JSON.parse(userString);
+      return userObj && userObj.username ? userObj : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const [user, setUser] = useState(getUserFromStorage());
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // You can use this if you want to do something specific on /profile page
+  const isProfilePage = location.pathname === "/profile";
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
     navigate("/login");
+    setIsMenuOpen(false);
   };
 
   return (
@@ -22,11 +39,14 @@ const Nav = () => {
 
         {/* Desktop Navigation Items */}
         <ul className="hidden sm:flex gap-4 items-center">
-          <li>
-            <Link to="/profile" className="hover:text-gray-300 transition">
-              My Store
-            </Link>
-          </li>
+          {/* Show My Store only if user is NOT logged in */}
+          {!user && (
+            <li>
+              <Link to="/profile" className="hover:text-gray-300 transition">
+                My Store
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* Auth Buttons */}
@@ -45,7 +65,7 @@ const Nav = () => {
             </>
           ) : (
             <>
-              <span className="text-sm">Welcome, {JSON.parse(user).username}</span>
+              <span className="text-sm">Welcome, {user.username}</span>
               <button
                 onClick={handleLogout}
                 className="bg-red-500 px-4 py-2 rounded text-sm hover:bg-red-600 transition"
@@ -61,7 +81,7 @@ const Nav = () => {
           className="sm:hidden text-white focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? <span>&#10005;</span> : <span>&#9776;</span>} {/* Close/Open Icon */}
+          {isMenuOpen ? <span>&#10005;</span> : <span>&#9776;</span>}
         </button>
       </div>
 
@@ -69,22 +89,26 @@ const Nav = () => {
       {isMenuOpen && (
         <div className="sm:hidden">
           <ul className="bg-[#17180c] text-white text-center">
-            <li>
-              <Link
-                to="/profile"
-                className="block py-2 hover:bg-gray-800"
-                onClick={() => setIsMenuOpen(false)} // Close menu on click
-              >
-                My Store
-              </Link>
-            </li>
+            {/* Show My Store only if user is NOT logged in */}
+            {!user && (
+              <li>
+                <Link
+                  to="/profile"
+                  className="block py-2 hover:bg-gray-800"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  My Store
+                </Link>
+              </li>
+            )}
+
             {!user ? (
               <>
                 <li>
                   <Link
                     to="/login"
                     className="block py-2 hover:bg-gray-800"
-                    onClick={() => setIsMenuOpen(false)} // Close menu on click
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Login
                   </Link>
@@ -93,7 +117,7 @@ const Nav = () => {
                   <Link
                     to="/signup"
                     className="block py-2 hover:bg-gray-800"
-                    onClick={() => setIsMenuOpen(false)} // Close menu on click
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     Sign Up
                   </Link>
@@ -102,13 +126,12 @@ const Nav = () => {
             ) : (
               <>
                 <li>
-                  <span className="block py-2">Welcome, {JSON.parse(user).username}</span>
+                  <span className="block py-2">Welcome, {user.username}</span>
                 </li>
                 <li>
                   <button
                     onClick={() => {
                       handleLogout();
-                      setIsMenuOpen(false); // Close menu on logout
                     }}
                     className="block w-full text-left py-2 hover:bg-gray-800"
                   >
