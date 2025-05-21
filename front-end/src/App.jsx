@@ -10,6 +10,7 @@ import LoginForm from "./Component/LoginForm";
 import LandingPage from "./pages/LandingPage";
 import SignupForm from "./Component/SignupForm";
 import ProductTable from "./Component/ProductTable";
+import Navbar from "./Component/Navbar";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginForm />} />
         </Routes>
+        <Navbar/>
         <Footer />
       </div>
     </>

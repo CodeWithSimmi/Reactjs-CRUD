@@ -1,51 +1,52 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import React from 'react';
+import { menu_list } from '../menulist';
 
-const Navbar = () => {
-  const [user, setUser] = useState(localStorage.getItem("user"));
+const Exploremenu = ({ category, setCategory }) => {
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  };
+
 
   return (
-    <nav className="bg-gray-800 text-white">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <Link to="/" className="text-xl font-bold">
-          Logo
-        </Link>
-        <div>
-          {!user ? (
-            <>
-              <Link
-                to="/login"
-                className="mr-4 hover:underline"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Sign Up
-              </Link>
-            </>
-          ) : (
-            <>
-              <span className="mr-4">Welcome, {JSON.parse(user).username}</span>
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
-              >
-                Logout
-              </button>
-            </>
-          )}
-        </div>
+    <div className="bg-gray-100 py-10 px-4" id="explore-menu">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
+        Explore Our Menu
+      </h1>
+      <p className="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, suscipit
+        voluptatum recusandae excepturi totam doloribus, labore iusto,
+        praesentium necessitatibus autem eveniet laudantium debitis deserunt
+        voluptatibus nisi sapiente velit tempora incidunt.
+      </p>
+      <div className="flex flex-wrap justify-center gap-12">
+        {menu_list.map((item, index) => (
+          <div
+            key={index}
+            onClick={() =>
+              setCategory((prev) => (prev === item.menu_name ? 'All' : item.menu_name))
+            }
+            className="group flex flex-col items-center cursor-pointer"
+          >
+            <img
+              className={`w-24 h-24 rounded-full border-4 ${
+                category === item.menu_name
+                  ? 'border-indigo-500'
+                  : 'border-red-400'
+              } transition-transform transform group-hover:scale-105`}
+              src={item.menu_image}
+              alt={item.menu_name}
+            />
+            <p
+              className={`mt-2 font-medium text-lg ${
+                category === item.menu_name ? 'text-indigo-500' : 'text-gray-700'
+              }`}
+            >
+              {item.menu_name}
+            </p>
+          </div>
+        ))}
       </div>
-    </nav>
+      <hr className="mt-8 border-gray-300" />
+    </div>
   );
 };
 
-export default Navbar;
+export default Exploremenu;

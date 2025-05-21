@@ -13,17 +13,17 @@ const Nav = () => {
 
   const navItems = [
     
-    { path: "/profile", label: "Profile" },
+    { path: "/profile", label: "MY STORE" },
 
     
   ];
 
   return (
-    <div className="bg-gray-800 text-white">
+    <div className="bg-[#17180c] text-white">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-white">
-          Logo
+        <Link to="/" className="text-2xl font-bold text-white sm:text-xl">
+          LetmeGrab
         </Link>
 
         {/* Navigation Items */}
