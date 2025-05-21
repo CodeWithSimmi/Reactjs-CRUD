@@ -1,22 +1,22 @@
 export const menu_list = [
   {
-    menu_name: 'Breakfast',
+    menu_name: 'Espresso',
     menu_image: './img1.webp',
   },
   {
-    menu_name: 'Lunch',
+    menu_name: 'Americano',
     menu_image: './Coffee.jpg',
   },
   {
-    menu_name: 'Dinner',
+    menu_name: 'Mocha',
     menu_image: './img1.webp',
   },
   {
-    menu_name: 'Dessert',
+    menu_name: 'Macchiato',
     menu_image: './Coffee.jpg',
   },
   {
-    menu_name: 'Snacks',
+    menu_name: 'Cappuccino',
     menu_image: './img1.webp',
   },
 ];
