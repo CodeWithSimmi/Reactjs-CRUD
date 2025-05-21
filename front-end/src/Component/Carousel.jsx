@@ -14,7 +14,7 @@ const Hero = () => {
 
   return (
     <div className="w-full ">
-      {/* Image Display */}
+     
       <div className="relative w-full  ">
         <img
           src={images[currentIndex]}

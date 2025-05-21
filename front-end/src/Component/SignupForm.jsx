@@ -17,7 +17,7 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate passwords match
+    
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match!");
       return;
@@ -36,7 +36,7 @@ const SignupForm = () => {
       return;
     }
 
-    // Save new user (excluding confirmPassword)
+    
     const newUser = {
       username: formData.username,
       email: formData.email,
@@ -47,7 +47,7 @@ const SignupForm = () => {
     localStorage.setItem("users", JSON.stringify(users));
     alert("Signup successful!");
 
-    // Reset form
+    
     setFormData({
       username: "",
       email: "",

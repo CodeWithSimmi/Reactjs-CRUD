@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Nav = () => {
-  // Helper to safely parse user from localStorage
+ 
   const getUserFromStorage = () => {
     try {
       const userString = localStorage.getItem("user");
@@ -19,7 +19,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // You can use this if you want to do something specific on /profile page
+  
   const isProfilePage = location.pathname === "/profile";
 
   const handleLogout = () => {
@@ -37,9 +37,9 @@ const Nav = () => {
           LetmeGrab
         </Link>
 
-        {/* Desktop Navigation Items */}
+        
         <ul className="hidden sm:flex gap-4 items-center">
-          {/* Show My Store only if user is NOT logged in */}
+         
           {!user && (
             <li>
               <Link to="/profile" className="hover:text-gray-300 transition">
@@ -49,7 +49,7 @@ const Nav = () => {
           )}
         </ul>
 
-        {/* Auth Buttons */}
+        
         <div className="hidden sm:flex items-center gap-4">
           {!user ? (
             <>
@@ -76,7 +76,7 @@ const Nav = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        
         <button
           className="sm:hidden text-white focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -85,11 +85,11 @@ const Nav = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
+     
       {isMenuOpen && (
         <div className="sm:hidden">
           <ul className="bg-[#17180c] text-white text-center">
-            {/* Show My Store only if user is NOT logged in */}
+           
             {!user && (
               <li>
                 <Link
