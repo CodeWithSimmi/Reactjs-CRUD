@@ -1,13 +1,12 @@
 import ImageCarousel from "../Component/Carousel";
+import Menu from "../Component/Menu";
 
 const LandingPage = () => {
   return (
     <div className=" ">
       <ImageCarousel />
-      {/* <div className="text-center mt-8">
-        <h1 className="text-3xl font-bold">Welcome to Our Platform</h1>
-        <p className="text-lg mt-4">Explore our features and products!</p>
-      </div> */}
+      <Menu/>
+      
     </div>
   );
 };
