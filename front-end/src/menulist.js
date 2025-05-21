@@ -9,7 +9,7 @@ export const menu_list = [
   },
   {
     menu_name: 'Dinner',
-    menu_image: './Coffee.jpg',
+    menu_image: './img1.webp',
   },
   {
     menu_name: 'Dessert',
@@ -17,6 +17,6 @@ export const menu_list = [
   },
   {
     menu_name: 'Snacks',
-    menu_image: './Coffee.jpg',
+    menu_image: './img1.webp',
   },
 ];

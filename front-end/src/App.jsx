@@ -3,9 +3,9 @@ import Nav from "./Component/Nav";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Component/Footer";
 import Privatecomponent from "./Component/Privatecomponent";
-import LoginForm from "./Component/LoginForm";
 import LandingPage from "./pages/LandingPage";
-import SignupForm from "./Component/SignupForm";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
 import ProductTable from "./Component/ProductTable";
 
 function App() {
@@ -23,8 +23,8 @@ function App() {
 
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </main>
 
