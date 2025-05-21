@@ -1,5 +1,3 @@
-
-
 import "./App.css";
 import Nav from "./Component/Nav";
 import { Route, Routes } from "react-router-dom";
@@ -21,7 +19,7 @@ function App() {
 
         <Routes>
           <Route element={<Privatecomponent />}>
-            <Route path="/profile" element={<ProductTable/>} />
+            <Route path="/profile" element={<ProductTable />} />
           </Route>
 
           {/* Public routes */}

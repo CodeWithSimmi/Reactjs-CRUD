@@ -2,9 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 text-white p-4 absolute bottom-0 w-full">
-      <h4>E-Commerce Dashboard</h4>
-    </div>
+    <footer className="bg-gray-900 text-white py-4 w-full text-center shadow-inner">
+      <h4 className="text-lg font-semibold">E-Commerce Dashboard</h4>
+      <p className="text-sm mt-1">&copy; {new Date().getFullYear()} Simran Arora</p>
+    </footer>
   );
 };
 
